@@ -4,7 +4,7 @@ import logging
 from collections.abc import Callable
 from pathlib import Path
 
-from error import PathTraversalError
+from mrml_common.error import PathTraversalError
 
 logger = logging.getLogger(__name__)
 

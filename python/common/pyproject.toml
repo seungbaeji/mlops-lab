@@ -1,5 +1,7 @@
 [project]
-authors = [{ name = "Seungbae Ji", email = "seungbae.ji@gmail.com" }]
+authors = [
+  { name = "Seungbae Ji", email = "seungbae.ji@gmail.com" },
+]
 dependencies = [
   "opentelemetry-api>=1.34.1",
   "opentelemetry-exporter-otlp>=1.34.1",
@@ -13,25 +15,47 @@ requires-python = ">=3.12"
 version = "0.1.0"
 
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires      = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=65.5.1",
+  "wheel",
+]
 
 [dependency-groups]
-dev = ["mypy>=1.16.1", "pytest>=8.4.1", "pytest-mock>=3.14.1"]
+dev = [
+  "build>=1.3.0",
+  "mypy>=1.16.1",
+  "pytest>=8.4.1",
+  "pytest-mock>=3.14.1",
+  "ruff>=0.0.241",
+]
 
-[tool.poetry]
-packages = [{ include = "common", from = "src" }]
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true  # MANIFEST.in 없이도 package-data 동작(아래 섹션과 함께)
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["mrml_common*"]
+
+# 타입 힌트 배포(PEP 561)
+[tool.setuptools.package-data]
+mrml_common = ["py.typed"]
 
 [[tool.uv.index]]
+name        = "nexus"
 explicit    = true
-name        = "devpi"
-publish-url = "https://devpi.gitops.mrml.xyz/seungbae/dev"
-url         = "https://devpi.gitops.mrml.xyz/seungbae/dev"
+url         = "https://nexus.gitops.mrml.xyz/repository/pypi/simple"
+publish-url = "https://nexus.gitops.mrml.xyz/repository/pypi-hosted/"
 
 [tool.pytest.ini_options]
-addopts    = "-ra -v"
-pythonpath = ["src"]
-testpaths  = ["tests"]
+addopts = "-ra -v"
+pythonpath = [
+  "src",
+]
+testpaths = [
+  "tests",
+]
 
 [tool.mypy]
 check_untyped_defs     = true
@@ -41,7 +65,7 @@ python_version         = "3.12"
 strict                 = false
 
 [[tool.mypy.overrides]]
-module = "src.common.*"
+module = "src.mrml_common.*"
 strict = true
 
 [[tool.mypy.overrides]]

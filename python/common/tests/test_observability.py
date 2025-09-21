@@ -1,6 +1,6 @@
 import logging
 
-from common.observability import (
+from mrml_common.observability import (
     JSONFormatter,
     LogfmtFormatter,
     MetricFactory,

@@ -1,6 +1,6 @@
 from unittest import mock
 
-from common.config import setup_logger
+from mrml_common.config import setup_logger
 
 
 def make_toml_config(tmp_path):
