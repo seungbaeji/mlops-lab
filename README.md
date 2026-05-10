@@ -95,3 +95,4 @@ make run-iot-mlops
 ---
 
 This repository is optimized for hands-on MLOps and data engineering practice in a personal homelab. While the current example is IoT-focused, the stack is designed for easy extension to other domains. Feel free to fork or modify for your own use!
+
